@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	 xmlns="http://www.piraeusbank.gr/SchemaDefinitions/GenericSchemas/DynamicEventRouting"
+	 targetNamespace="http://www.piraeusbank.gr/SchemaDefinitions/GenericSchemas/DynamicEventRouting"
+	 elementFormDefault="qualified"
+	 attributeFormDefault="unqualified">
+	<xs:element name="BusinessEvents" type="BusinessEventsType"/>
+	<xs:complexType name="BusinessEventType">
+		<xs:sequence>
+			<xs:element name="BusinessEventName" type="xs:string"/>
+			<xs:element name="PMWorkerActivityPath" type="xs:string" minOccurs="0"/>
+			<xs:element name="SHWorkerActivityPath" type="xs:string"/>
+			<xs:element name="BusinessObject">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:enumeration value="ACCOUNTING"/>
+						<xs:enumeration value="CARDS"/>
+						<xs:enumeration value="CRS"/>
+						<xs:enumeration value="LDAP"/>
+						<xs:enumeration value="UTILITIES"/>
+						<xs:enumeration value="USERMGMT"/>
+						<xs:enumeration value="BROKERAGE"/>
+						<xs:enumeration value="EBANK"/>
+						<xs:enumeration value="THIRDPARTYPAYMENTS"/>
+						<xs:enumeration value="SOCIALSECURITIES"/>
+						<xs:enumeration value="INSURANCES"/>
+						<xs:enumeration value="EGOVERNMENT"/>
+						<xs:enumeration value="EINVOICE"/>
+						<xs:enumeration value="LOANS"/>
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:element>
+			<xs:element name="SpecificFolderPath" type="xs:string" minOccurs="0"/>
+			<xs:element name="JMSTimeoutInMinutes" type="xs:short" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="DynamicEventRouting">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="BusinessEvents"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="BusinessEvent" type="BusinessEventType"/>
+	<xs:complexType name="BusinessEventsType">
+		<xs:sequence>
+			<xs:element ref="BusinessEvent" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>
